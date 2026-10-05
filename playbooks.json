@@ -1,0 +1,92 @@
+{
+  "playbook_version": "1.0",
+  "note": "All content is fictional and written for a demo project. Not based on any real organisation's process.",
+  "min_confidence_for_auto_pass": 0.90,
+  "global_escalation_rules": [
+    "Required evidence is missing or unavailable",
+    "Analyst notes are ambiguous enough to support more than one verdict",
+    "Verdict contradicts the evidence",
+    "Model confidence is below min_confidence_for_auto_pass",
+    "Playbook version changed since the case was closed"
+  ],
+  "playbooks": [
+    {
+      "id": "PB-PHISH",
+      "name": "Phishing",
+      "required_evidence": ["email_headers", "url_analysis", "recipient_list"],
+      "checklist": [
+        {"id": "P1", "check": "Sender and header analysis is documented"},
+        {"id": "P2", "check": "URLs and attachments were analysed"},
+        {"id": "P3", "check": "All recipients of the email were identified"},
+        {"id": "P4", "check": "Malicious email was removed from affected mailboxes"},
+        {"id": "P5", "check": "Users who clicked or opened were identified and credentials reset if needed"},
+        {"id": "P6", "check": "Verdict is justified by the evidence"}
+      ]
+    },
+    {
+      "id": "PB-MAL",
+      "name": "Malware",
+      "required_evidence": ["edr_alert", "file_hash_reputation", "process_tree"],
+      "checklist": [
+        {"id": "M1", "check": "File hash was checked against reputation sources"},
+        {"id": "M2", "check": "Process tree was reviewed"},
+        {"id": "M3", "check": "Host was isolated, or the decision not to isolate is justified"},
+        {"id": "M4", "check": "Other hosts were checked for the same indicators"},
+        {"id": "M5", "check": "Remediation (cleanup or reimage) is confirmed"},
+        {"id": "M6", "check": "Verdict is justified by the evidence"}
+      ]
+    },
+    {
+      "id": "PB-ACCT",
+      "name": "User Account",
+      "required_evidence": ["auth_logs", "user_confirmation"],
+      "checklist": [
+        {"id": "A1", "check": "Login pattern was reviewed (location, time, device)"},
+        {"id": "A2", "check": "User was contacted and the response is recorded"},
+        {"id": "A3", "check": "Credentials reset and sessions revoked if compromise is suspected"},
+        {"id": "A4", "check": "MFA status was checked"},
+        {"id": "A5", "check": "Mailbox rules and permissions were reviewed for persistence"},
+        {"id": "A6", "check": "Verdict is justified by the evidence"}
+      ]
+    },
+    {
+      "id": "PB-NET",
+      "name": "Network",
+      "required_evidence": ["firewall_logs", "ip_reputation", "traffic_summary"],
+      "checklist": [
+        {"id": "N1", "check": "Source and destination were identified"},
+        {"id": "N2", "check": "IP or domain reputation was checked"},
+        {"id": "N3", "check": "Traffic volume and pattern were analysed"},
+        {"id": "N4", "check": "Block action taken, or the decision not to block is justified"},
+        {"id": "N5", "check": "Affected internal assets were scoped"},
+        {"id": "N6", "check": "Verdict is justified by the evidence"}
+      ]
+    },
+    {
+      "id": "PB-DATA",
+      "name": "Data Related",
+      "required_evidence": ["dlp_alert", "file_access_logs", "data_classification"],
+      "checklist": [
+        {"id": "D1", "check": "Data classification was identified"},
+        {"id": "D2", "check": "Volume and destination of the transfer were established"},
+        {"id": "D3", "check": "Business justification or user intent was checked"},
+        {"id": "D4", "check": "Access revoked or transfer blocked where needed"},
+        {"id": "D5", "check": "Data owner or manager was notified"},
+        {"id": "D6", "check": "Verdict is justified by the evidence"}
+      ]
+    },
+    {
+      "id": "PB-CLOUD",
+      "name": "Cloud Configuration",
+      "required_evidence": ["cloud_audit_log", "config_snapshot", "resource_owner"],
+      "checklist": [
+        {"id": "C1", "check": "Misconfigured or exposed resource was identified"},
+        {"id": "C2", "check": "Exposure window was determined"},
+        {"id": "C3", "check": "Access logs were checked for external access"},
+        {"id": "C4", "check": "Configuration was fixed and the fix verified"},
+        {"id": "C5", "check": "Resource owner was notified"},
+        {"id": "C6", "check": "Verdict is justified by the evidence"}
+      ]
+    }
+  ]
+}
