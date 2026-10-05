@@ -1,0 +1,1 @@
+Mini case-review scorer (demo with fictional data)
