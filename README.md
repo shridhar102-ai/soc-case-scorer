@@ -17,3 +17,6 @@ flags missing evidence, and routes weak or ambiguous cases to human QC review.
 - [ ] AI scoring of each checklist item
 - [ ] Human review queue
 - [ ] Database storage
+## Run it
+    ./run.sh      (start)
+    ./stop.sh     (stop)
